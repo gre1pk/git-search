@@ -36,10 +36,6 @@ const onCange = (e) => {
   }
 };
 
-const getElOnId = (arr, id) => {
-  return arr.filter((e) => e.id === +id);
-};
-
 const cangeValue = debounce(onCange, 300);
 
 const createElement = (tag, elementClass) => {
@@ -48,6 +44,10 @@ const createElement = (tag, elementClass) => {
     element.classList.add(elementClass);
   }
   return element;
+};
+
+const getElOnId = (arr, id) => {
+  return arr.filter((e) => e.id === +id);
 };
 
 const autoComplete = (arrRepo = []) => {
