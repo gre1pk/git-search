@@ -25,12 +25,13 @@ const debounce = (fn, ms) => {
   };
 };
 const onCange = (e) => {
+  const valid = /^[a-zA-Zа-яёА-ЯЁ]+(?:[\s.-][a-zA-Zа-яёА-ЯЁ]+)*$/.test(
+    searchInput.value
+  );
   if (searchInput.value.length < 1) {
     autoComplete();
   }
-  if (
-    /^[a-zA-Zа-яёА-ЯЁ]+(?:[\s.-][a-zA-Zа-яёА-ЯЁ]+)*$/.test(searchInput.value)
-  ) {
+  if (valid) {
     getRepositories(e.target.value);
   }
 };
