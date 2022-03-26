@@ -57,7 +57,7 @@ const autoComplete = (arrRepo = []) => {
   repos.forEach((e) => {
     const repo = createElement('li', 'input-search__item');
     repo.textContent = e.name;
-    repo.setAttribute('id', e.id);
+    repo.setAttribute('data-id', e.id);
     completContainer.append(repo);
   });
 };
@@ -69,7 +69,7 @@ const seveRepo = ({ id, name, owner, stargazers_count }) => {
   const btn = createElement('button', 'delette-btn');
   itemInfo.innerText = `Name: ${name} \n Owner: ${owner.login} \n Stars: ${stargazers_count}`;
   markedContainer.append(item);
-  item.setAttribute('id', id);
+  item.setAttribute('data-id', id);
   item.append(itemInfo);
   item.append(btn);
 };
@@ -78,7 +78,7 @@ searchInput.addEventListener('keyup', cangeValue);
 
 repoContainer.addEventListener('click', (e) => {
   if (e.target.classList.value === 'input-search__item') {
-    const repo = getElOnId(arrRepo, e.target.getAttribute('id'));
+    const repo = getElOnId(arrRepo, e.target.getAttribute('data-id'));
     seveRepo(...repo);
     searchInput.value = '';
     autoComplete();
