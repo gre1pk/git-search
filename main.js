@@ -1,10 +1,12 @@
 const searchInput = document.querySelector('.input-search');
 const repoContainer = document.querySelector('.container');
+const urlBase = 'https://api.github.com';
+const regular = /^[a-zA-Zа-яёА-ЯЁ]+(?:[\s.-][a-zA-Zа-яёА-ЯЁ]+)*$/;
 
 let arrRepo = [];
 
-const getRepositories = async (text) => {
-  const url = `https://api.github.com/search/repositories?q=${text}`;
+const getRepositories = async (urlAdres, text) => {
+  const url = `${urlAdres}/search/repositories?q=${text}`;
   try {
     const respons = await fetch(url);
     const repositories = await respons.json();
@@ -24,15 +26,18 @@ const debounce = (fn, ms) => {
     }, ms);
   };
 };
+const validCheck = (reg, text) => {
+  return reg.test(text);
+};
+
 const onCange = (e) => {
-  const valid = /^[a-zA-Zа-яёА-ЯЁ]+(?:[\s.-][a-zA-Zа-яёА-ЯЁ]+)*$/.test(
-    searchInput.value
-  );
+  const valid = validCheck(regular, searchInput.value);
+  
   if (searchInput.value.length < 1) {
     autoComplete();
   }
   if (valid) {
-    getRepositories(e.target.value);
+    getRepositories(urlBase, e.target.value);
   }
 };
 
