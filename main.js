@@ -32,7 +32,7 @@ const validCheck = (reg, text) => {
 
 const onCange = (e) => {
   const valid = validCheck(regular, searchInput.value);
-  
+
   if (searchInput.value.length < 1) {
     autoComplete();
   }
@@ -68,16 +68,14 @@ const autoComplete = (arrRepo = []) => {
   });
 };
 
-const seveRepo = ({ id, name, owner, stargazers_count }) => {
+const seveRepo = ({ name, owner, stargazers_count }) => {
   const markedContainer = document.querySelector('.marked__list');
   const item = createElement('li', 'marked__item');
-  const itemInfo = createElement('div', 'marked__item-text');
-  const btn = createElement('button', 'delette-btn');
-  itemInfo.innerText = `Name: ${name} \n Owner: ${owner.login} \n Stars: ${stargazers_count}`;
+  item.innerHTML = `<div class='marked__item-text'>Name: ${name}<br>Owner: ${owner.login}<br>
+  Stars: ${stargazers_count}</div>
+  <button class='delette-btn'></button>
+  `;
   markedContainer.append(item);
-  item.setAttribute('data-id', id);
-  item.append(itemInfo);
-  item.append(btn);
 };
 
 searchInput.addEventListener('keyup', cangeValue);
